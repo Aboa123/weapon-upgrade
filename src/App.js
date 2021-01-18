@@ -103,7 +103,7 @@ const App = () => {
                     {minutes}분 {seconds}초 경과<br/>
                     {upgradeCheck}<br/>
                     <b>{weapon+"강"}</b><br/>
-                    <img style={{maxWidth:"400px",maxHeight:"400px",objectFit:"contain"}} src={Data[weapon].url}/><br/>
+                    <img style={{maxWidth:"400px",height:"400px",objectFit:"contain"}} src={Data[weapon].url}/><br/>
                     판매가격 : {Data[weapon].price.toLocaleString("ko-KR")}원<br/>
                     강화비용 : {Data[weapon].upPrice.toLocaleString("ko-KR")}원<br/>
                     강화성공확률 : {Data[weapon].upPercent}%<br/>

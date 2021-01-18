@@ -15,10 +15,7 @@
 }
 
 .App .upgrade-table .upgrade-table-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    
 }
 
 .App .upgrade-table .upgrade-table-box-info {
