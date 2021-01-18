@@ -1,11 +1,14 @@
 import './App.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {Data} from './data';
 
 const App = () => {
     const [weapon,setWeapon] = useState(0);
     const [money,setMoney] = useState(1000000); 
+    const [useMoney,setUseMoney] = useState(0); 
     const [upgradeCheck,setUpgrageCheck] = useState("");
+    const [seconds,setSeconds] = useState(0);
+    const [minutes,setMinutes] = useState(0);
 
     const up = () => {
         try {
@@ -18,6 +21,7 @@ const App = () => {
                 else
                 {
                     setMoney(money-Data[weapon].upPrice)
+                    setUseMoney(useMoney+Data[weapon].upPrice)
                     if(Math.floor(Math.random()*100)<=Data[weapon].upPercent)
                     {
                         setWeapon(weapon+1)
@@ -66,41 +70,61 @@ const App = () => {
         }
         else
         {
-            alert("골드가 부족합니다.")
+            alert("조건에 충족되지 않았습니다.")
         }
     }
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setSeconds(seconds+1)
+            if(seconds >= 59)
+            {
+                setMinutes(minutes+1)
+                setSeconds(0)
+            }
+        }, 1000);
+        return () => clearInterval(timer);
+      }, [minutes, seconds]);
+
     return (
         <div className="App">
-            <div>
-                <p style={{color:"red"}}>새로고침 시 초기화</p>
+            <div className="upgrade-table">
+                <h1><b>- 강화 확률표 -</b></h1>
+                <div className="upgrade-table-box">
+                    {Data.map((item)=>
+                        <div className="upgrade-table-box-info">
+                            <b>강화단계 : {item.value}강</b><br/>
+                            강화비용 : <b>{item.upPrice.toLocaleString("ko-KR")}</b>골드<br/>
+                            판매가격 : <b>{item.price.toLocaleString("ko-KR")}</b>골드<br/>
+                            강화성공확률 : <b>{item.upPercent}%</b><br/>
+                            강화실패시 등급하락 확률 : <b>{item.downPercent}%</b><br/>
+                            강화실패시 파괴확률 : <b>{item.desPercent}%</b><br/>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <div className="upgrade-panel">
+                <p style={{color:"red"}}><b>새로고침 시 초기화</b></p>
                 <p><b>- 클리어 조건 -</b></p>
                 <p><b>50,000,000골드와 20강무기</b></p>
-                <input type="button" onClick={()=>clear()} value="클리어"/>
-                <input type="button" onClick={()=>up()} value="업그레이드"/>
-                <input type="button" onClick={()=>sell()} value="판매"/>
-                <p>소지 골드 : {money.toLocaleString("ko-KR")}골드</p>
-                <p>{upgradeCheck}</p>
-                <p><b>{weapon+"강"}</b></p>
-                <img style={{maxWidth:"400px",maxHeight:"400px",objectFit:"contain"}} src={Data[weapon].url}/><br/>
-                <p>판매가격 : {Data[weapon].price.toLocaleString("ko-KR")}원</p>
-                <p>강화비용 : {Data[weapon].upPrice.toLocaleString("ko-KR")}원</p>
-                <p>강화성공확률 : {Data[weapon].upPercent}%</p>
-                <p>강화실패시 등급하락 확률 : {Data[weapon].downPercent}%</p>
-                <p>강화실패시 파괴확률 : {Data[weapon].desPercent}%</p>
-            </div>
-            <div>
-                <h1><b>- 강화 확률표 -</b></h1>
-                {Data.map((item)=>
-                    <div style={{textAlign:"left",border:"1px solid black"}}>
-                        <p><b>강화단계 : {item.value}강</b></p>
-                        <p>강화비용 : <b>{item.upPrice.toLocaleString("ko-KR")}</b>골드</p>
-                        <p>판매가격 : <b>{item.price.toLocaleString("ko-KR")}</b>골드</p>
-                        <p>강화성공확률 : <b>{item.upPercent}%</b></p>
-                        <p>강화실패시 등급하락 확률 : <b>{item.downPercent}%</b></p>
-                        <p>강화실패시 파괴확률 : <b>{item.desPercent}%</b></p>
-                    </div>
-                )}
+                <div>
+                    <input className="clear-btn btn" type="button" onClick={()=>clear()} value="클리어"/>
+                    <input className="upgrade-btn btn" type="button" onClick={()=>up()} value="업그레이드"/>
+                    <input className="sell-btn btn" type="button" onClick={()=>sell()} value="판매"/>
+                </div>
+                <div>
+                    소지 골드 : {money.toLocaleString("ko-KR")}골드<br/>
+                    총 사용 골드 : {useMoney.toLocaleString("ko-KR")}골드<br/>
+                    {minutes}분 {seconds}초 경과<br/>
+                    {upgradeCheck}<br/>
+                    <b>{weapon+"강"}</b><br/>
+                    <img style={{maxWidth:"400px",maxHeight:"400px",objectFit:"contain"}} src={Data[weapon].url}/><br/>
+                    판매가격 : {Data[weapon].price.toLocaleString("ko-KR")}원<br/>
+                    강화비용 : {Data[weapon].upPrice.toLocaleString("ko-KR")}원<br/>
+                    강화성공확률 : {Data[weapon].upPercent}%<br/>
+                    강화실패시 등급하락 확률 : {Data[weapon].downPercent}%<br/>
+                    강화실패시 파괴확률 : {Data[weapon].desPercent}%<br/>
+                </div>
             </div>
         </div>
     );
