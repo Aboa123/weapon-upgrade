@@ -88,21 +88,6 @@ const App = () => {
 
     return (
         <div className="App">
-            <div className="upgrade-table">
-                <h1><b>- 강화 확률표 -</b></h1>
-                <div className="upgrade-table-box">
-                    {Data.map((item)=>
-                        <div className="upgrade-table-box-info">
-                            <b>강화단계 : {item.value}강</b><br/>
-                            강화비용 : <b>{item.upPrice.toLocaleString("ko-KR")}</b>골드<br/>
-                            판매가격 : <b>{item.price.toLocaleString("ko-KR")}</b>골드<br/>
-                            강화성공확률 : <b>{item.upPercent}%</b><br/>
-                            강화실패시 등급하락 확률 : <b>{item.downPercent}%</b><br/>
-                            강화실패시 파괴확률 : <b>{item.desPercent}%</b><br/>
-                        </div>
-                    )}
-                </div>
-            </div>
             <div className="upgrade-panel">
                 <p style={{color:"red"}}><b>새로고침 시 초기화</b></p>
                 <p><b>- 클리어 조건 -</b></p>
@@ -124,6 +109,21 @@ const App = () => {
                     강화성공확률 : {Data[weapon].upPercent}%<br/>
                     강화실패시 등급하락 확률 : {Data[weapon].downPercent}%<br/>
                     강화실패시 파괴확률 : {Data[weapon].desPercent}%<br/>
+                </div>
+            </div>
+            <div className="upgrade-table">
+                <h1><b>- 강화 확률표 -</b></h1>
+                <div className="upgrade-table-box">
+                    {Data.map((item)=>
+                        <div className="upgrade-table-box-info">
+                            <b>강화단계 : {item.value}강</b><br/>
+                            강화비용 : <b>{item.upPrice.toLocaleString("ko-KR")}</b>골드<br/>
+                            판매가격 : <b>{item.price.toLocaleString("ko-KR")}</b>골드<br/>
+                            강화성공확률 : <b>{item.upPercent}%</b><br/>
+                            강화실패시 등급하락 확률 : <b>{item.downPercent}%</b><br/>
+                            강화실패시 파괴확률 : <b>{item.desPercent}%</b><br/>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

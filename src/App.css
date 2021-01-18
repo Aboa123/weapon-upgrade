@@ -32,13 +32,11 @@
 }
 
 .App .upgrade-panel {
-    display: inline-flex;
+    display: inline-block;
     box-sizing: border-box;
     flex-direction: column;
     width: 65%;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
@@ -76,4 +74,20 @@
 
 .App .upgrade-panel .sell-btn:active {
     background-color: rgb(141, 100, 100);
+}
+
+@media screen and (max-width: 980px) {
+    .App .upgrade-table {
+        display: block;
+        width: 100%;
+        overflow: auto;
+        max-height: initial;
+    }
+    .App .upgrade-panel {
+        display: block;
+        width: 100%;
+    }
+    .App {
+        overflow: auto;
+    }
 }
