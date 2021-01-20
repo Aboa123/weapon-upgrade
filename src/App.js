@@ -93,9 +93,9 @@ const App = () => {
                 <div className="my-info">
                     <a className="git-info" href="https://github.com/Aboa123/weapon-upgrade" target="blank">GitHub</a><br/>
                     <span className="discord-info">Discord : Aboa#9076</span><br/>
-                    <span className="lang-info" onClick={()=>{LangSet('kr')}}>KR</span>
-                    <span className="lang-info" onClick={()=>{LangSet('en')}}>EN</span>
-                    <span className="lang-info" onClick={()=>{LangSet('jp')}}>JP</span>
+                    <input type="button" className="lang-info" onClick={()=>{LangSet('kr')}} value="KR"/>
+                    <input type="button" className="lang-info" onClick={()=>{LangSet('en')}} value="EN"/>
+                    <input type="button" className="lang-info" onClick={()=>{LangSet('jp')}} value="JP"/>
                 </div>
                 <p style={{color:"red"}}><b>{Translate("refresh_warning")}</b></p>
                 <p><b>- {Translate("clear_terms")} -</b></p>

@@ -55,12 +55,19 @@
 }
 
 .App .my-info .lang-info {
-    margin: 5px;
     cursor: pointer;
+    outline: none;
+    margin: 5px 5px 5px 0px;
+    width: 50px;
+    height: 30px;
+    border:none;
+    background-color: royalblue;
+    color:white;
+    font-weight: bold;
 }
 
 .App .my-info .lang-info:active {
-    color: rgb(238, 180, 180);
+    background-color: rgb(238, 180, 180);
 }
 
 .App .upgrade-panel .btn {
